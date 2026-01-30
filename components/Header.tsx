@@ -10,6 +10,11 @@ const navigationLinks = [
   { label: '수집 통계', href: '/visualization' },
 ];
 
+/**
+ * Renders the site header with a logo and horizontal navigation that highlights the active route.
+ *
+ * @returns A header JSX element containing the site logo and navigation links with separators between items.
+ */
 export default function Header() {
   const pathname = usePathname();
 

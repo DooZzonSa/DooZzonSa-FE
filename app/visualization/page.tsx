@@ -39,6 +39,13 @@ const privacyTips = [
   '추가적 데이터 삭제 요청 - 대부분의 서비스는 개인정보 삭제를 지원합니다',
 ];
 
+/**
+ * Renders a client-side visualization page that displays privacy-related policy collection statistics, risk-level interpretation guides, collapsible privacy tips, and sortable statistic cards with progress bars.
+ *
+ * Fetches statistics from `/api/v1/statisticsa` on mount; if the fetch fails the component continues to display initialized dummy data and surfaces an error message.
+ *
+ * @returns A JSX element representing the visualization page UI
+ */
 export default function VisualizationPage() {
   const [statistics, setStatistics] = useState<PolicyItem[]>(dummyData);
   const [loading, setLoading] = useState(false);

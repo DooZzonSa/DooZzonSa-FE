@@ -26,6 +26,12 @@ export const metadata: Metadata = {
   description: "약관 분석 및 개인정보 수집 통계",
 };
 
+/**
+ * Root application layout that sets document language, global fonts, and page structure.
+ *
+ * @param children - React nodes rendered inside the layout's main content area
+ * @returns The root HTML element containing a <body> with applied font variables, the site header, and a <main> wrapper for page content
+ */
 export default function RootLayout({
   children,
 }: Readonly<{
