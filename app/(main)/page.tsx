@@ -1,6 +1,6 @@
- "use client";
+"use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import ProgressBar from "@/app/_components/main/ProgressBar";
 import {
@@ -8,6 +8,7 @@ import {
   CompleteScreen,
   LoadingScreen,
 } from "@/app/_components/main/screens";
+import { analyzePolicy, type PolicyAnalyzeResponse } from "@/app/_api/policy";
 
 type ScreenKey = "before" | "loading" | "complete";
 
@@ -15,30 +16,26 @@ const SCREEN_SEQUENCE: ScreenKey[] = ["before", "loading", "complete"];
 
 export default function Home() {
   const [activeScreen, setActiveScreen] = useState<ScreenKey>("before");
+  const [analysisData, setAnalysisData] =
+    useState<PolicyAnalyzeResponse["data"] | null>(null);
   const currentStep = SCREEN_SEQUENCE.indexOf(activeScreen) + 1;
 
-  const handleAnalyze = (_agreementText: string) => {
+  const handleAnalyze = async (agreementText: string) => {
     setActiveScreen("loading");
-  };
-
-  const handleLoadingComplete = () => {
-    setActiveScreen("complete");
+    setAnalysisData(null);
+    try {
+      const response = await analyzePolicy(agreementText);
+      setAnalysisData(response.data);
+      setActiveScreen("complete");
+    } catch (error) {
+      console.error(error);
+      setActiveScreen("before");
+    }
   };
 
   const handleComplete = () => {
     setActiveScreen("before");
   };
-
-  // 로딩 화면에서 2초 후 완료 화면으로 전환 (임시)
-  useEffect(() => {
-    if (activeScreen === "loading") {
-      const timer = setTimeout(() => {
-        handleLoadingComplete();
-      }, 2000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [activeScreen]);
 
   return (
     <main className="flex min-h-screen flex-col items-center bg-slate-50">
@@ -54,7 +51,9 @@ export default function Home() {
             <BeforeAnalysisScreen onAnalyze={handleAnalyze} />
           )}
           {activeScreen === "loading" && <LoadingScreen />}
-          {activeScreen === "complete" && <CompleteScreen onComplete={handleComplete} />}
+          {activeScreen === "complete" && analysisData && (
+            <CompleteScreen onComplete={handleComplete} data={analysisData} />
+          )}
         </section>
       </div>
     </main>

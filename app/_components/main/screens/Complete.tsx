@@ -1,11 +1,15 @@
-import { completeData } from "@/app/_mocks/completeData";
-import { TriangleAlert } from 'lucide-react';
+import { TriangleAlert } from "lucide-react";
 import PrimaryButton from "@/app/_components/common/buttons/PrimaryButton";
+import type { PolicyAnalyzeResponse } from "@/app/_api/policy";
 const getProgressColor = (rate: number) =>
   rate <= 25 ? "bg-[#EF4444]" : "bg-[#60A5FA]";
 
-export default function CompleteScreen({ onComplete }: { onComplete: () => void }) {
-  const data = completeData.data;
+type CompleteScreenProps = {
+  onComplete: () => void;
+  data: PolicyAnalyzeResponse["data"];
+};
+
+export default function CompleteScreen({ onComplete, data }: CompleteScreenProps) {
 
   return (
     <div>
