@@ -1,6 +1,13 @@
-# 약간(YAKKAN) - 개인정보 약관 분석 서비스
-<img width="247" height="85" alt="Logo" src="https://github.com/user-attachments/assets/8b0ce200-9843-4e38-9614-bb40f581a055" /> <br/>
-> 약관이 '약간' 이상할 때, 위험한 지점만 콕 집어주는 개인정보 약관 분석 서비스
+<h1 align="center">약간(YAKKAN) - 개인정보 약관 분석 서비스</h1>
+
+<p align="center">
+  <img width="247" height="85" alt="Logo" src="https://github.com/user-attachments/assets/8b0ce200-9843-4e38-9614-bb40f581a055" />
+</p>
+
+<p align="center">
+  <b>약관이 ‘약간’ 이상할 때,<br/>
+  위험한 지점만 콕 집어주는 개인정보 약관 분석 서비스</b>
+</p>
 
 <br/>
 
@@ -235,9 +242,3 @@ GET /api/v1/statistics
 ## 👥 팀 소개
 
 **두바이쫀득사자** 프론트엔드 팀
-
-<br/>
-
----
-
-**약간(YAKKAN)** - 약관을 읽지 않아도, 속지 않게 만드는 서비스
