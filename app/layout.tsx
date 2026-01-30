@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
-import Header from "@/components/Header";
+import Header from "@/app/_components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,7 +22,7 @@ const pretendard = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "pYakkan - 개인정보 약관 분석",
+  title: "Yakkan - 개인정보 약관 분석",
   description: "약관 분석 및 개인정보 수집 통계",
 };
 
