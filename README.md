@@ -1,5 +1,5 @@
 # 약간(YAKKAN) - 개인정보 약관 분석 서비스
-
+<img width="247" height="85" alt="Logo" src="https://github.com/user-attachments/assets/8b0ce200-9843-4e38-9614-bb40f581a055" />
 > 약관이 '약간' 이상할 때, 위험한 지점만 콕 집어주는 개인정보 약관 분석 서비스
 
 <br/>
@@ -10,9 +10,8 @@
 |------|------|
 | **프로젝트명** | 약간(YAKKAN) - 개인정보 약관 분석 서비스 |
 | **서비스 주제** | 비교 기반 개인정보 약관 위험도 분석 및 시각화 |
-| **해결 방식** | 약관을 '해석'하지 않고 '비교'하여 위험 신호만 빠르게 제공 |
 | **팀 구성** | Frontend 2명 · Backend 2명 |
-| **개발 기간** | 2025.01 ~ 진행중 |
+| **개발 기간** | 2025.01.30 ~ 1.31 (아스키톤) |
 
 <br/>
 
@@ -55,67 +54,47 @@
 
 ### 1️⃣ 약관 분석 (Core)
 
+<img width="1312" alt="약관 분석 입력 화면" src="https://github.com/user-attachments/assets/70c08253-cb1f-4480-a5c2-11cfb7c185c4" />
+
 #### 입력
-- 개인정보 처리방침 전문을 **복사 & 붙여넣기**만 하면 됩니다
-- 약관 종류를 고르거나 추가 정보를 요구하지 않습니다
-- 분석 버튼 한 번이면 충분합니다
+개인정보 처리방침 전문을 **복사 & 붙여넣기**만 하면 됩니다.
 
 #### 결과 - 비교 기반 분석
 약관에서 수집하는 개인정보 항목을 추출한 뒤, 다른 서비스들이 해당 정보를 **얼마나 자주 수집하는지 평균 비율**로 보여줍니다.
 
-**예시:**
-- 이메일: 평균 80%
-- 실명: 평균 18%
-- 위치정보: 평균 14%
+<img width="1356" alt="약관 분석 결과 화면" src="https://github.com/user-attachments/assets/bf1dd4ca-bb63-40a9-af18-6cade22a3d9e" />
 
-숫자 하나만으로도 사용자는 **'이건 좀 과한데?'** 를 바로 느낄 수 있습니다.
-
-#### 주의 포인트
-모든 내용을 설명하지 않고, **눈여겨봐야 할 지점만 짧게** 알려줍니다.
-
-**출력 예시:**
-- ⚠️ 평균보다 낮은 비율의 서비스만 수집하는 실명 정보를 필수로 요구하고 있어요
-- ⚠️ 개인정보를 마케팅 및 AI 학습에 활용할 수 있어요
-- ⚠️ 일부 개인정보가 해외 서버로 이전돼요
-
-#### 위험도 시각화
-여러 요소를 종합해 약관의 **위험도를 0~100%로 시각화**합니다.
-
-이 수치는 "가입하면 안 된다"가 아니라, **한 번 더 생각해볼 필요가 있는지**를 알려주는 지표입니다.
-
+<br/>
 
 ### 2️⃣ 악용 이슈 대시보드
 
+<img width="1321" alt="악용 이슈 대시보드" src="https://github.com/user-attachments/assets/2e032316-4363-4ccf-943f-d3a99e21dd49" />
+
 약관의 위험성은 추상적일 때 체감되지 않습니다. 그래서 약간은 **실제 개인정보 유출·약관 악용 사례**를 뉴스 기반으로 함께 제공합니다.
 
-**제공 정보:**
-- 최근 발생한 개인정보 유출 사건
-- 약관 악용 사례
-- 주간 요약 통계
-
+<br/>
 
 ### 3️⃣ 수집 통계 - 기준선 제공
+
+<img width="1357" alt="수집 통계 페이지" src="https://github.com/user-attachments/assets/9186ed1c-4942-433e-873e-21cd78c3c076" />
 
 사용자가 스스로 판단할 수 있도록 **주요 개인정보 항목별 전체 서비스 기준 수집 비율**을 제공합니다.
 
 **제공 정보:**
+- 위험도별 해석 가이드
 - 위험도별 개인정보 항목 분류 (낮음/중간/높음)
 - 각 항목의 평균 수집률
-- 개인정보 보호 팁
-
-이 그래프는 **"이 서비스만 유난한지"** 를 판단하는 기준선 역할을 합니다.
 
 <br/>
 
 ## 🛠️ 기술 스택
 
 ### Frontend
-- **Framework:** Next.js 16.1.6 (App Router)
-- **Language:** TypeScript 5
-- **UI Library:** React 19.1.0
-- **Styling:** Tailwind CSS 4
-- **Icons:** lucide-react
-- **Code Quality:** ESLint 9
+- <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original.svg" width="18" /> **Framework:** Next.js
+- <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" width="18" /> **Language:** TypeScript
+- <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-original.svg" width="18" /> **Styling:** Tailwind CSS
+- 🧩 **Icons:** lucide-react
+- <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/eslint/eslint-original.svg" width="18" /> **Code Quality:** ESLint
 
 ### Architecture
 - Client-side Rendering (CSR)
@@ -125,10 +104,6 @@
 <br/>
 
 ## 🚀 시작하기
-
-### 환경 요구사항
-- Node.js 20 이상
-- npm 또는 yarn
 
 ### 설치 및 실행
 
@@ -170,6 +145,7 @@ DooZzonSa-FE/
 │   │   ├── common/
 │   │   ├── dashboard/
 │   │   └── main/
+│   ├── _api/                # API 통신 로직
 │   ├── layout.tsx           # 루트 레이아웃
 │   └── globals.css          # 전역 스타일
 ├── public/                  # 정적 파일
@@ -257,7 +233,11 @@ GET /api/v1/statistics
 <br/>
 
 ## 👥 팀 소개
+
 **두바이쫀득사자** 프론트엔드 팀
 
+<br/>
+
+---
 
 **약간(YAKKAN)** - 약관을 읽지 않아도, 속지 않게 만드는 서비스
