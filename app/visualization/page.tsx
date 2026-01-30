@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
 interface PolicyItem {
@@ -40,7 +40,9 @@ const privacyTips = [
 ];
 
 export default function VisualizationPage() {
-  const [statistics] = useState<PolicyItem[]>(dummyData);
+  const [statistics, setStatistics] = useState<PolicyItem[]>(dummyData);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
     '낮음': false,
     '중간': false,
@@ -48,6 +50,35 @@ export default function VisualizationPage() {
     'tips': false,
   });
   const [sortBy, setSortBy] = useState<'name' | 'rate-asc' | 'rate-desc'>('name');
+
+  // 백엔드 API 연동
+  useEffect(() => {
+    const fetchStatistics = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('/api/v1/statisticsa');
+        
+        if (!response.ok) {
+          console.warn('API 호출 실패, 더미 데이터 사용');
+          setLoading(false);
+          return;
+        }
+
+        const data = await response.json();
+        if (data.policyItems && Array.isArray(data.policyItems)) {
+          setStatistics(data.policyItems);
+        }
+        setError(null);
+      } catch (err) {
+        console.error('Failed to fetch statistics:', err);
+        setError(err instanceof Error ? err.message : '알 수 없는 오류가 발생했습니다');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStatistics();
+  }, []);
 
   const toggleSection = (level: string) => {
     setExpandedSections(prev => ({
@@ -74,43 +105,35 @@ export default function VisualizationPage() {
     }
   });
 
-  // TODO: 백엔드 API 연동
-  // useEffect(() => {
-  //   const fetchStatistics = async () => {
-  //     try {
-  //       setLoading(true);
-  //       const response = await fetch('/api/v1/statisticsa');
-  //       
-  //       if (!response.ok) {
-  //         throw new Error('데이터를 불러오는데 실패했습니다');
-  //       }
-  //
-  //       const data: ApiResponse = await response.json();
-  //       setStatistics(data.policyItems);
-  //       setError(null);
-  //     } catch (err) {
-  //       setError(err instanceof Error ? err.message : '알 수 없는 오류가 발생했습니다');
-  //       console.error('Failed to fetch statistics:', err);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //
-  //   fetchStatistics();
-  // }, []);
-
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
-        {/* 헤더 */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            개인정보 수집 통계
-          </h1>
-          <p className="text-gray-600 text-lg">
-            타 기관 데이터를 바탕으로 약관들에 비해 평균적으로 어떤 개인정보를 과도하게 수집하는지 한 눈에 비교해보세요
-          </p>
-        </div>
+        {/* 로딩 상태 */}
+        {loading && (
+          <div className="text-center py-12">
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#506FB2]"></div>
+            <p className="mt-4 text-gray-600">데이터를 불러오는 중...</p>
+          </div>
+        )}
+
+        {/* 에러 상태 */}
+        {error && (
+          <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center mb-8">
+            <p className="text-red-600">{error}</p>
+          </div>
+        )}
+
+        {!loading && (
+          <>
+            {/* 헤더 */}
+            <div className="text-center mb-12">
+              <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                약관 내용 수집 통계
+              </h1>
+              <p className="text-gray-600 text-lg">
+                타 기관 개인정보 약관 데이터를 바탕으로 평균적으로 어떤 약관들이 수집되는지 한 눈에 비교해보세요
+              </p>
+            </div>
 
         {/* 위험도별 해석 가이드 */}
         <div className="mb-12 space-y-4">
@@ -239,14 +262,15 @@ export default function VisualizationPage() {
             </div>
           </div>
           
-          {/* 평균 수집률 표시 - 좌우 정렬 */}
+          {/* 평균 수집률과 범례 */}
           <div className="flex items-center justify-between mb-8">
+            {/* 왼쪽: 평균 수집률 레이블과 차트 바 */}
             <div className="flex items-center gap-3">
-              <div className="w-12 h-3 bg-[#506FB2] rounded-[10px]"></div>
               <span className="text-sm font-medium text-gray-700">평균 수집률</span>
+              <div className="w-12 h-3 bg-[#506FB2] rounded-[10px]"></div>
             </div>
             
-            {/* 범례 - 우측 */}
+            {/* 오른쪽: 범례 */}
             <div className="flex items-center gap-6">
               {Object.entries(riskColors).map(([level, colors]) => (
                 <div key={level} className="flex items-center gap-2">
@@ -286,15 +310,15 @@ export default function VisualizationPage() {
                   </span>
                 </div>
 
-                {/* 프로그레스 바 - 두께 줄임 */}
-                <div className="flex items-center gap-4">
+                {/* 프로그레스 바 */}
+                <div className="flex items-center gap-1">
                   <div className="flex-1 h-4 bg-gray-200 rounded-[10px] overflow-hidden">
                     <div
                       className="h-full bg-[#506FB2] rounded-[10px] transition-all duration-500"
                       style={{ width: `${stat.averageCollectionRate}%` }}
                     ></div>
                   </div>
-                  <span className="text-sm font-medium text-gray-700 min-w-[50px] text-right">
+                  <span className="text-sm font-medium text-gray-700 min-w-[45px] text-right">
                     {stat.averageCollectionRate}%
                   </span>
                 </div>
@@ -302,6 +326,8 @@ export default function VisualizationPage() {
             );
           })}
         </div>
+          </>
+        )}
       </div>
     </div>
   );
