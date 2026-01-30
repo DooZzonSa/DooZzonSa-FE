@@ -25,6 +25,10 @@ export default function Home() {
     setActiveScreen("complete");
   };
 
+  const handleComplete = () => {
+    setActiveScreen("before");
+  };
+
   // 로딩 화면에서 2초 후 완료 화면으로 전환 (임시)
   useEffect(() => {
     if (activeScreen === "loading") {
@@ -52,7 +56,7 @@ export default function Home() {
           {activeScreen === "loading" && (
             <LoadingScreen onComplete={handleLoadingComplete} />
           )}
-          {activeScreen === "complete" && <CompleteScreen />}
+          {activeScreen === "complete" && <CompleteScreen onComplete={handleComplete} />}
         </section>
       </div>
     </main>
