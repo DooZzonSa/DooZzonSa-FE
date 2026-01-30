@@ -21,7 +21,7 @@ export default function CompleteScreen({ onComplete, data }: CompleteScreenProps
               <span className="h-7 w-2 rounded-sm bg-[#60A5FA]" />
               <span className="h-4 w-2 rounded-sm bg-[#EF4444]" />
             </div>
-            <h2 className="text-2xl font-bold text-slate-900">
+            <h2 className="text-2xl text-shadow-xs font-semibold text-slate-900">
               다른 서비스와 비교
             </h2>
           </div>
@@ -29,7 +29,7 @@ export default function CompleteScreen({ onComplete, data }: CompleteScreenProps
           <div className="mt-8 flex-1 space-y-6 overflow-y-auto pr-2">
             {data.agreements.map((agreement) => (
               <div key={agreement.name} className="flex items-center gap-4">
-                <span className="min-w-[72px] text-xl font-bold text-slate-900">
+                <span className="min-w-[72px] text-lg font-semibold text-slate-900">
                   {agreement.name}
                 </span>
                 <div className="relative h-7 flex-1 overflow-hidden rounded-full bg-[#E5E7EB]">
@@ -55,7 +55,7 @@ export default function CompleteScreen({ onComplete, data }: CompleteScreenProps
         <section className="flex h-[460px] flex-1 flex-col rounded-2xl bg-white p-6 shadow-[0_8px_24px_rgba(15,23,42,0.08)] md:h-[520px] md:p-8">
           <div className="flex items-center gap-3">
             <TriangleAlert className="text-2xl text-red-600"/>
-            <h2 className="text-2xl font-bold text-slate-900">주의할 점</h2>
+            <h2 className="text-2xl text-shadow-xs font-semibold text-slate-900">주의할 점</h2>
           </div>
 
           <div className="mt-6 flex-1 space-y-5 overflow-y-auto pr-2">
