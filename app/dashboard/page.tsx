@@ -9,7 +9,12 @@ import { PolicyIssuesData } from './types';
 type FilterType = '전체' | '정보 유출' | '약관 악용';
 
 const FILTERS: FilterType[] = ['전체', '정보 유출', '약관 악용'];
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://192.168.0.50:8081';
+
+// 환경변수 필수 체크 - 하드코딩된 IP 노출 방지
+if (!process.env.NEXT_PUBLIC_API_BASE_URL) {
+  throw new Error('NEXT_PUBLIC_API_BASE_URL 환경변수가 설정되지 않았습니다');
+}
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 // 백엔드 enum 코드와 UI 라벨 매핑
 const ISSUE_TYPE_MAP: Record<string, FilterType> = {
