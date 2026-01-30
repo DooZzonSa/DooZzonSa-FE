@@ -1,10 +1,6 @@
 import LoadingAnimation from "@/app/_components/common/loading";
 
-interface LoadingScreenProps {
-  onComplete?: () => void;
-}
-
-export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
+export default function LoadingScreen() {
   return (
     <div className="flex flex-col items-center justify-center py-20">
       <LoadingAnimation />
