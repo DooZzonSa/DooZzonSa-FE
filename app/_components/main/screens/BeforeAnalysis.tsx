@@ -32,8 +32,8 @@ export default function BeforeAnalysisScreen({
       <textarea
         value={agreementText}
         onChange={(event) => setAgreementText(event.target.value)}
-        placeholder=""
-        className="h-[420px] w-full resize-none rounded-2xl border border-transparent bg-[#DAEAF6] px-4 py-4 text-[15px] leading-relaxed text-slate-900 shadow-sm outline-none transition focus:border-slate-100 focus:shadow-[0_0_0_3px_rgba(148,163,184,0.25)] sm:h-[480px] sm:px-10 sm:py-10"
+        placeholder="개인정보 처리 방침을 붙여넣어주세요."
+        className="h-[50vh] min-h-[360px] max-h-[65vh] w-full resize-none rounded-2xl border border-transparent bg-[#DAEAF6] px-4 py-4 text-[15px] leading-relaxed text-slate-900 shadow-sm outline-none transition focus:border-slate-100 focus:shadow-[0_0_0_3px_rgba(148,163,184,0.25)] sm:px-10 sm:py-10"
       />
 
       <div className="flex justify-center">
