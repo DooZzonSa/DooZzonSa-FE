@@ -15,7 +15,9 @@ export default function BeforeAnalysisScreen({
     <div className="flex flex-col gap-10">
       <header className="flex flex-col items-center gap-4 text-center">
         <h1 className="text-4xl font-bold text-slate-900 md:text-5xl">
-          약관을 붙여넣고{" "}
+          약관을 붙여넣고
+          <span className="hidden md:inline"> </span>
+          <br className="md:hidden" />
           <span className="bg-gradient-to-t from-yellow-300 from-40% to-transparent to-40%">
             위험도
           </span>
