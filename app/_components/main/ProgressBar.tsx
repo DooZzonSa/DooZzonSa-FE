@@ -9,7 +9,8 @@ export default function ProgressBar({
 }: ProgressBarProps) {
   return (
     <div
-      className="grid grid-cols-3 gap-2"
+      className="grid gap-2"
+      style={{ gridTemplateColumns: `repeat(${totalSteps}, minmax(0, 1fr))` }}
       role="progressbar"
       aria-valuenow={currentStep}
       aria-valuemin={1}
