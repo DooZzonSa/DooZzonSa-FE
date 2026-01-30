@@ -16,11 +16,12 @@ const SCREEN_SEQUENCE: ScreenKey[] = ["before", "loading", "complete"];
 
 export default function Home() {
   const [activeScreen, setActiveScreen] = useState<ScreenKey>("before");
+  const [agreementText, setAgreementText] = useState("");
   const [analysisData, setAnalysisData] =
     useState<PolicyAnalyzeResponse["data"] | null>(null);
   const currentStep = SCREEN_SEQUENCE.indexOf(activeScreen) + 1;
 
-  const handleAnalyze = async (agreementText: string) => {
+  const handleAnalyze = async () => {
     setActiveScreen("loading");
     setAnalysisData(null);
     try {
@@ -48,7 +49,11 @@ export default function Home() {
       <div className="flex w-full flex-1 items-center justify-center">
         <section className="flex w-full max-w-4xl flex-col gap-6 px-6 py-12">
           {activeScreen === "before" && (
-            <BeforeAnalysisScreen onAnalyze={handleAnalyze} />
+            <BeforeAnalysisScreen
+              agreementText={agreementText}
+              onChangeText={setAgreementText}
+              onAnalyze={handleAnalyze}
+            />
           )}
           {activeScreen === "loading" && <LoadingScreen />}
           {activeScreen === "complete" && analysisData && (
