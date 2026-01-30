@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import WeeklySummaryBox from '@/components/dashboard/WeeklySummaryBox';
-import StatisticsCards from '@/components/dashboard/StatisticsCards';
-import PolicyIssueCard from '@/components/dashboard/PolicyIssueCard';
+import WeeklySummaryBox from '@/app/_components/dashboard/WeeklySummaryBox';
+import StatisticsCards from '@/app/_components/dashboard/StatisticsCards';
+import PolicyIssueCard from '@/app/_components/dashboard/PolicyIssueCard';
 import { PolicyIssuesData } from './types';
 import { DUMMY_DATA } from './constants';
 
