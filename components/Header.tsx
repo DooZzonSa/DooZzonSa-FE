@@ -14,11 +14,11 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="w-full border-b border-gray-200">
+    <header className="w-full border-b border-gray-200 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center flex-shrink-0">
             <Image
               src="/image/Logo.png"
               alt="pYakkan Logo"
@@ -30,20 +30,27 @@ export default function Header() {
           </Link>
 
           {/* Navigation */}
-          <nav className="flex items-center gap-8">
-            {navigationLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-[#506FB2] ${
-                  pathname === link.href
-                    ? 'text-[#506FB2]'
-                    : 'text-gray-600'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+          <nav className="flex items-center gap-4 sm:gap-6 md:gap-8">
+            {navigationLinks.map((link, index) => {
+              const isActive = pathname === link.href;
+              const isLastItem = index === navigationLinks.length - 1;
+
+              return (
+                <div key={link.href} className="flex items-center gap-4 sm:gap-6 md:gap-8">
+                  <Link
+                    href={link.href}
+                    className={`text-xs sm:text-sm font-medium transition-colors hover:text-[#506FB2] whitespace-nowrap ${
+                      isActive ? 'text-[#506FB2]' : 'text-gray-600'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                  {!isLastItem && (
+                    <div className="h-4 w-px bg-gray-300" aria-hidden="true"></div>
+                  )}
+                </div>
+              );
+            })}
           </nav>
         </div>
       </div>
