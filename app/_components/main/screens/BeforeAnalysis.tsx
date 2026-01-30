@@ -4,7 +4,7 @@ import { useState } from "react";
 import PrimaryButton from "@/app/_components/common/buttons/PrimaryButton";
 
 type BeforeAnalysisScreenProps = {
-  onAnalyze: () => void;
+  onAnalyze: (agreementText: string) => void;
 };
 
 export default function BeforeAnalysisScreen({
@@ -39,7 +39,7 @@ export default function BeforeAnalysisScreen({
       <div className="flex justify-center">
         <PrimaryButton
           className="w-full max-w-xs"
-          onClick={onAnalyze}
+          onClick={() => onAnalyze(agreementText)}
           disabled={agreementText.trim().length === 0}
         >
           분석하기

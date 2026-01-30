@@ -17,7 +17,7 @@ export default function Home() {
   const [activeScreen, setActiveScreen] = useState<ScreenKey>("before");
   const currentStep = SCREEN_SEQUENCE.indexOf(activeScreen) + 1;
 
-  const handleAnalyze = () => {
+  const handleAnalyze = (_agreementText: string) => {
     setActiveScreen("loading");
   };
 
@@ -53,9 +53,7 @@ export default function Home() {
           {activeScreen === "before" && (
             <BeforeAnalysisScreen onAnalyze={handleAnalyze} />
           )}
-          {activeScreen === "loading" && (
-            <LoadingScreen onComplete={handleLoadingComplete} />
-          )}
+          {activeScreen === "loading" && <LoadingScreen />}
           {activeScreen === "complete" && <CompleteScreen onComplete={handleComplete} />}
         </section>
       </div>
