@@ -11,6 +11,19 @@ type FilterType = '전체' | '정보 유출' | '약관 악용';
 const FILTERS: FilterType[] = ['전체', '정보 유출', '약관 악용'];
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://192.168.0.50:8081';
 
+// 백엔드 enum 코드와 UI 라벨 매핑
+const ISSUE_TYPE_MAP: Record<string, FilterType> = {
+  'DATA_BREACH': '정보 유출',
+  'POLICY_ABUSE': '약관 악용',
+  '정보 유출': '정보 유출',
+  '약관 악용': '약관 악용',
+};
+
+// UI 라벨을 백엔드 코드로 변환 (필터링용)
+const normalizeIssueType = (issueType: string): FilterType | null => {
+  return ISSUE_TYPE_MAP[issueType] || null;
+};
+
 export default function DashboardPage() {
   const [data, setData] = useState<PolicyIssuesData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -41,9 +54,14 @@ export default function DashboardPage() {
   const filteredIssues = useMemo(() => {
     if (!data) return [];
     
-    return activeFilter === '전체' 
-      ? data.policyIssues 
-      : data.policyIssues.filter(issue => issue.issueType === activeFilter);
+    if (activeFilter === '전체') {
+      return data.policyIssues;
+    }
+    
+    return data.policyIssues.filter(issue => {
+      const normalizedType = normalizeIssueType(issue.issueType);
+      return normalizedType === activeFilter;
+    });
   }, [data, activeFilter]);
 
   if (loading) {

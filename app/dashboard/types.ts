@@ -2,7 +2,7 @@ export interface PolicyIssue {
   title: string;
   summary: string;
   source: string;
-  issueType: string;
+  issueType: '정보 유출' | '약관 악용' | 'DATA_BREACH' | 'POLICY_ABUSE';
   url: string;
 }
 
