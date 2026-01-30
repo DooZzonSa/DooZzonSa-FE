@@ -5,7 +5,7 @@ const getProgressColor = (rate: number) =>
   rate <= 25 ? "bg-[#EF4444]" : "bg-[#60A5FA]";
 
 export default function CompleteScreen({ onComplete }: { onComplete: () => void }) {
-  const data = completeData;
+  const data = completeData.data;
 
   return (
     <div>
